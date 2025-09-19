@@ -24,5 +24,6 @@ Imports:
     dplyr,
     DT,
     leaflet,
+    magrittr,
     shiny,
     tidyr
