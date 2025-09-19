@@ -101,7 +101,7 @@ sumariza_regioes <- function(dados, indice_tipo) {
     "4205407", "2800308", "1721000"
   )
 
-  df_filtrado <- dados %>% dplyr::filter(D_indice_tipo == indice_tipo)
+  df_filtrado <- dados %>% tibble::tibble() %>% dplyr::filter(D_indice_tipo == indice_tipo)
 
   # Brazil summary
   brasil_geral <- df_filtrado %>%
@@ -110,6 +110,16 @@ sumariza_regioes <- function(dados, indice_tipo) {
       media_geral = mean(D_indice_value, na.rm = TRUE),
       mediana_geral = stats::median(D_indice_value, na.rm = TRUE),
       desvio_padrao_geral = stats::sd(D_indice_value, na.rm = TRUE)
+    ) %>% 
+    dplyr::ungroup()
+
+  brasil_regioes_metropolitanas <- df_filtrado %>%
+    dplyr::filter(!is.na(NM_RM)) %>%
+    dplyr::group_by(NV_GEO = "MN") %>%
+    dplyr::summarise(
+      media_regiao_metropolitana = mean(D_indice_value, na.rm = TRUE),
+      mediana_regiao_metropolitana = stats::median(D_indice_value, na.rm = TRUE),
+      desvio_padrao_regiao_metropolitana = stats::sd(D_indice_value, na.rm = TRUE)
     )
 
   brasil_capitais <- df_filtrado %>%
@@ -119,9 +129,12 @@ sumariza_regioes <- function(dados, indice_tipo) {
       media_capital = mean(D_indice_value, na.rm = TRUE),
       mediana_capital = stats::median(D_indice_value, na.rm = TRUE),
       desvio_padrao_capital = stats::sd(D_indice_value, na.rm = TRUE)
-    )
+    ) %>% 
+    dplyr::ungroup()
+    
 
-  brasil <- dplyr::left_join(brasil_geral, brasil_capitais, by = "NV_GEO") %>%
+  brasil <- dplyr::left_join(brasil_geral, brasil_regioes_metropolitanas, by = "NV_GEO") %>%
+    dplyr::left_join(brasil_capitais, by = "NV_GEO") %>%
     dplyr::mutate(NM_REGIAO = "Brasil") %>%
     dplyr::select(-NV_GEO)
 
@@ -132,7 +145,20 @@ sumariza_regioes <- function(dados, indice_tipo) {
       media_geral = mean(D_indice_value, na.rm = TRUE),
       mediana_geral = stats::median(D_indice_value, na.rm = TRUE),
       desvio_padrao_geral = stats::sd(D_indice_value, na.rm = TRUE)
-    ) %>% tidyr::drop_na()
+    ) %>% 
+    dplyr::ungroup() %>% 
+    tidyr::drop_na()
+  
+  regioes_regioes_metropolitanas <- df_filtrado %>%
+    dplyr::filter(!is.na(NM_RM)) %>%
+    dplyr::group_by(NV_GEO = "MN", NM_REGIAO) %>%
+    dplyr::summarise(
+      media_regiao_metropolitana = mean(D_indice_value, na.rm = TRUE),
+      mediana_regiao_metropolitana = stats::median(D_indice_value, na.rm = TRUE),
+      desvio_padrao_regiao_metropolitana = stats::sd(D_indice_value, na.rm = TRUE)
+    ) %>% 
+    dplyr::ungroup() %>% 
+    tidyr::drop_na()
 
   regioes_capitais <- df_filtrado %>%
     dplyr::filter(CD_MUN %in% capitais) %>%
@@ -141,11 +167,15 @@ sumariza_regioes <- function(dados, indice_tipo) {
       media_capital = mean(D_indice_value, na.rm = TRUE),
       mediana_capital = stats::median(D_indice_value, na.rm = TRUE),
       desvio_padrao_capital = stats::sd(D_indice_value, na.rm = TRUE)
-    ) %>% tidyr::drop_na()
+    ) %>% 
+    dplyr::ungroup() %>% 
+    tidyr::drop_na()
 
-  regioes <- dplyr::left_join(regioes_geral, regioes_capitais, by = c("NV_GEO", "NM_REGIAO")) %>%
+  regioes <- dplyr::left_join(regioes_geral, regioes_regioes_metropolitanas, by = c("NV_GEO", "NM_REGIAO")) %>%
+    dplyr::left_join(regioes_capitais, by = c("NV_GEO", "NM_REGIAO")) %>%
     dplyr::select(-NV_GEO)
 
   dplyr::bind_rows(brasil, regioes) %>%
-    dplyr::mutate(dplyr::across(dplyr::where(is.double), ~ round(.x, 3)))
+    dplyr::mutate(dplyr::across(dplyr::where(is.double), ~ round(.x, 3))) |> 
+    dplyr::relocate(NM_REGIAO)
 }
