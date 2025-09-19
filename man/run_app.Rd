@@ -4,7 +4,7 @@
 \alias{run_app}
 \title{Run the geosegR Shiny application}
 \usage{
-run_app()
+run_app(dados_mapa)
 }
 \description{
 Run the geosegR Shiny application

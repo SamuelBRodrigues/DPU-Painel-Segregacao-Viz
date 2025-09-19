@@ -17,3 +17,12 @@ LazyData: true
 URL: https://github.com/SamuelBRodrigues/dpupsviz
 BugReports: https://github.com/SamuelBRodrigues/dpupsviz/issues
 RoxygenNote: 7.3.2
+Depends: 
+    R (>= 3.5)
+Imports: 
+    bslib,
+    dplyr,
+    DT,
+    leaflet,
+    shiny,
+    tidyr
