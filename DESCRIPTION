@@ -30,4 +30,5 @@ Imports:
     tidyr,
     stats,
     magrittr,
-    shinycssloaders
+    shinycssloaders,
+    openxlsx

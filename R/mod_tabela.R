@@ -28,7 +28,7 @@ mod_tabela_ui <- function(id) {
       downloadButton(ns("baixar_csv"), "Baixar CSV", class = "btn-sm"),
       downloadButton(ns("baixar_xlsx"), "Baixar XLSX", class = "btn-sm")
     ),
-    DTOutput(ns("tabela"))
+    shinycssloaders::withSpinner(DTOutput(ns("tabela")), type = 1)
   )
 }
 
