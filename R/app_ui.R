@@ -7,7 +7,7 @@ app_ui <- function() {
   bslib::page_navbar(
     title = "Painel de Segregação Étnico-Racial",
     footer = shiny::tags$div(
-      style = "background-color: #5BB02F; display:flex; align-items:center; gap:10px;",
+      style = "background-color: #5BB02F; display:flex; align-items:flex-start; gap:10px; width = 100vw; padding: 10px;",
       shiny::tags$img(src = "www/logo_DPU.png", height = "100px"),
       shiny::tags$img(src = "https://shiny-server.dpu.def.br/catadores.html/DPU_PNUD.png", height = "100px")
     ),
