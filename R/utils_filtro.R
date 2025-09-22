@@ -42,7 +42,7 @@ filter_dados <- function(dados, input) {
 filter_dados_mapa <- function(dados_mapa, input) {
   df <- dados_mapa %>%
     dplyr::filter(
-      NV_GEO == "MN",
+      NV_GEO == input$agg_geo,
       D_indice_tipo == input$indicie_tipo
     )
 
