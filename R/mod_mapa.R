@@ -16,8 +16,8 @@ mod_mapa_ui <- function(id) {
       selectInput(ns("indicie_tipo"), "Índices:", choices = NULL),
       selectInput(ns("categorias"), "Categorias:", choices = NULL, multiple = TRUE)
     ),
-    withSpinner(leafletOutput(ns("mapa"), height = "650px", width = "100%"), type = 1),
-    DTOutput(ns("tabela_regioes"))
+    withSpinner(leafletOutput(ns("mapa"), height = "650px", width = "100%"), type = 1)
+    #DTOutput(ns("tabela_regioes"))
   )
 }
 
@@ -43,22 +43,22 @@ mod_mapa_server <- function(id, dados) {
       plot_mapa(dados_mapa_filtrados())
     })
 
-    output$tabela_regioes <- renderDT({
-      datatable(
-        sumariza_regioes(dados, input$indicie_tipo),
-        options = list(
-          language = list(
-            search = "Pesquisar:",
-            lengthMenu = "Mostrar _MENU_ linhas",
-            info = "Mostrando _START_ a _END_ de _TOTAL_ registros",
-            paginate = list(
-              previous = "Anterior",
-              `next` = "Próximo"
-            ),
-            zeroRecords = "Nenhum registro encontrado"
-          )
-        )
-      )
-    })
+    #output$tabela_regioes <- renderDT({
+    #  datatable(
+    #    sumariza_regioes(dados, input$indicie_tipo),
+    #    options = list(
+    #      language = list(
+    #        search = "Pesquisar:",
+    #        lengthMenu = "Mostrar _MENU_ linhas",
+    #        info = "Mostrando _START_ a _END_ de _TOTAL_ registros",
+    #        paginate = list(
+    #          previous = "Anterior",
+    #          `next` = "Próximo"
+    #        ),
+    #        zeroRecords = "Nenhum registro encontrado"
+    #      )
+    #    )
+    #  )
+    #})
   })
 }
