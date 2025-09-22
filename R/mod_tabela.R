@@ -2,6 +2,8 @@
 #'
 #' @param id módulo ID
 #' @noRd
+#' @import shiny
+#' @import DT
 mod_tabela_ui <- function(id) {
   ns <- NS(id)
 
@@ -32,7 +34,6 @@ mod_tabela_ui <- function(id) {
 mod_tabela_server <- function(id, dados) {
   moduleServer(id, function(input, output, session) {
 
-    # Atualizar selectInput dinamicamente com base nos dados
     observe({
       updateSelectInput(session, "indicie_tipo", choices = unique(dados$D_indice_tipo))
       updateSelectInput(session, "categorias", choices = unique(dados$D_indice_CAT))
@@ -41,12 +42,10 @@ mod_tabela_server <- function(id, dados) {
       updateSelectInput(session, "rm", choices = unique(dados$NM_RM))
     })
 
-    # Reactive: filtra os dados com base nos inputs
     dados_filtrados <- reactive({
-      filter_dados(dados, input)  # função helper em utils_filtros.R
+      filter_dados(dados, input)
     })
 
-    # Renderizar a tabela
     output$tabela <- renderDT({
       datatable(
         dados_filtrados(),

@@ -19,11 +19,14 @@ BugReports: https://github.com/SamuelBRodrigues/dpupsviz/issues
 RoxygenNote: 7.3.2
 Depends: 
     R (>= 3.5)
-Imports: 
+Imports:
+    shiny,
     bslib,
     dplyr,
-    DT,
+    sf,
     leaflet,
-    magrittr,
-    shiny,
-    tidyr
+    DT,
+    tibble,
+    tidyr,
+    stats,
+    magrittr
