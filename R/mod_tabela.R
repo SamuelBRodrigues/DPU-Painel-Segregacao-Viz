@@ -22,6 +22,12 @@ mod_tabela_ui <- function(id) {
         selected = "MN"
       )
     ),
+    # parte principal
+    div(
+      style = "display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 10px;",
+      downloadButton(ns("baixar_csv"), "Baixar CSV", class = "btn-sm"),
+      downloadButton(ns("baixar_xlsx"), "Baixar XLSX", class = "btn-sm")
+    ),
     DTOutput(ns("tabela"))
   )
 }
@@ -65,5 +71,25 @@ mod_tabela_server <- function(id, dados) {
         )
       )
     })
+
+    # download CSV
+    output$baixar_csv <- downloadHandler(
+      filename = function() {
+        paste0("dados_filtrados_", Sys.Date(), ".csv")
+      },
+      content = function(file) {
+        write.csv(dados_filtrados(), file, row.names = FALSE)
+      }
+    )
+
+    # download XLSX
+    output$baixar_xlsx <- downloadHandler(
+      filename = function() {
+        paste0("dados_filtrados_", Sys.Date(), ".xlsx")
+      },
+      content = function(file) {
+        openxlsx::write.xlsx(dados_filtrados(), file)
+      }
+    )
   })
 }
