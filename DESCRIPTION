@@ -29,4 +29,5 @@ Imports:
     tibble,
     tidyr,
     stats,
-    magrittr
+    magrittr,
+    shinycssloaders
