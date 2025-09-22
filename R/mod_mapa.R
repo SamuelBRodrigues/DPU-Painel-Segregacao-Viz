@@ -41,7 +41,21 @@ mod_mapa_server <- function(id, dados) {
     })
 
     output$tabela_regioes <- renderDT({
-      datatable(sumariza_regioes(dados, input$indicie_tipo))
+      datatable(
+        sumariza_regioes(dados, input$indicie_tipo),
+        options = list(
+          language = list(
+            search = "Pesquisar:",
+            lengthMenu = "Mostrar _MENU_ linhas",
+            info = "Mostrando _START_ a _END_ de _TOTAL_ registros",
+            paginate = list(
+              previous = "Anterior",
+              `next` = "Próximo"
+            ),
+            zeroRecords = "Nenhum registro encontrado"
+          )
+        )
+      )
     })
   })
 }
