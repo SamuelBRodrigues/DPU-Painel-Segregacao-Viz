@@ -11,6 +11,7 @@ mod_mapa_ui <- function(id) {
   layout_sidebar(
     sidebar = sidebar(
       width = 300,
+      selectInput(ns("agg_geo"), "Agregação Geográfica:", choices = NULL),
       selectInput(ns("indicie_tipo"), "Índices:", choices = NULL),
       selectInput(ns("categorias"), "Categorias:", choices = NULL, multiple = TRUE)
     ),
@@ -28,6 +29,7 @@ mod_mapa_server <- function(id, dados) {
   moduleServer(id, function(input, output, session) {
 
     observe({
+      updateSelectInput(session, "agg_geo", choices = unique(dados$NV_GEO), selected = "MN")
       updateSelectInput(session, "indicie_tipo", choices = unique(dados$D_indice_tipo))
       updateSelectInput(session, "categorias", choices = unique(dados$D_indice_CAT))
     })
