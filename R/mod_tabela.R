@@ -54,7 +54,14 @@ mod_tabela_server <- function(id, dados) {
           scrollY = "70vh",
           scrollX = TRUE,
           scrollCollapse = TRUE,
-          fixedHeader = TRUE
+          fixedHeader = TRUE,
+          language = list(
+            search = "Pesquisar:",
+            lengthMenu = "Mostrar _MENU_ linhas",
+            info = "Mostrando _START_ a _END_ de _TOTAL_ registros",
+            paginate = list(previous = "Anterior", `next` = "Próximo"),
+            zeroRecords = "Nenhum registro encontrado"
+          )
         )
       )
     })
