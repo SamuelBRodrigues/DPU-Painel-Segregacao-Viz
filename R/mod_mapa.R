@@ -5,6 +5,7 @@
 #' @import shiny
 #' @import leaflet
 #' @import DT
+#' @import shinycssloaders
 mod_mapa_ui <- function(id) {
   ns <- NS(id)
 
@@ -15,7 +16,7 @@ mod_mapa_ui <- function(id) {
       selectInput(ns("indicie_tipo"), "Índices:", choices = NULL),
       selectInput(ns("categorias"), "Categorias:", choices = NULL, multiple = TRUE)
     ),
-    leafletOutput(ns("mapa"), height = "650px", width = "100%"),
+    withSpinner(leafletOutput(ns("mapa"), height = "650px", width = "100%"), type = 1),
     DTOutput(ns("tabela_regioes"))
   )
 }
