@@ -30,7 +30,13 @@ filter_dados <- function(dados, input) {
   if (length(input$rm) > 0) df <- df %>% dplyr::filter(NM_RM %in% input$rm)
   if (length(input$categorias) > 0) df <- df %>% dplyr::filter(D_indice_CAT %in% input$categorias)
 
-  df
+  df |> 
+    dplyr::select(
+      "Região" = NM_REGIAO, "UF" = NM_UF, "Região Metropolitana" = NM_RM, "Município" = NM_MUN_1, D_indice_value
+    ) |> 
+    dplyr::mutate(
+      D_indice_value = round(D_indice_value, 3)
+    )
 }
 
 #' Filter map data (sf safe)
