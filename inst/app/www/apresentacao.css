@@ -1,0 +1,20 @@
+#apresentacao {
+    line-height: 1.6;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;      /* ocupa 90% da tela */
+    max-width: 1100px; /* mas nunca ultrapassa 1100px */
+    margin: 0 auto;
+}
+
+#apresentacao h1 {
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+#apresentacao p {
+    margin-bottom: 16px;
+    text-align: justify;
+}
+
+

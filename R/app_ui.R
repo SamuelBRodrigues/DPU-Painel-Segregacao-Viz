@@ -15,10 +15,14 @@ app_ui <- function() {
     theme = bslib::bs_theme(version = 5, bg = "#FFFFFF", fg = "#000000ff"),
     bslib::nav_panel("Apresentação",
                      bslib::card(
-                       shiny::h1("Sobre o Painel"),
                        bslib::card_body(
-                         shiny::includeHTML(
-                           system.file("app/www/apresentacao.html", package = "dpupsviz")
+                         tagList(
+                           # Carrega o CSS externo
+                           includeCSS(system.file("app/www/apresentacao.css", package = "dpupsviz")),
+                           # Inclui o HTML
+                           shiny::includeHTML(
+                             system.file("app/www/apresentacao.html", package = "dpupsviz")
+                           )
                          )
                        )
                      )
