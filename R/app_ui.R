@@ -27,8 +27,8 @@ app_ui <- function() {
     # Footer
     footer = shiny::tags$div(
       class = "footer",
-      shiny::tags$img(src = "www/logo_DPU.png"),
-      shiny::tags$img(src = "https://shiny-server.dpu.def.br/catadores.html/DPU_PNUD.png")
+      shiny::tags$img(src = "www/logo_DPU_200h.png"),
+      shiny::tags$img(src = "www/DPU_PNUD_200h.png")
     ),
 
     # Painéis
