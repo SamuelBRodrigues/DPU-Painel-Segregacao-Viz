@@ -12,7 +12,14 @@ app_ui <- function() {
       shiny::tags$img(src = "https://shiny-server.dpu.def.br/catadores.html/DPU_PNUD.png", height = "100px")
     ),
     window_title = "Painel Segregação Étnico-Racial",
-    theme = bslib::bs_theme(version = 5, bg = "#FFFFFF", fg = "#000000ff"),
+    theme = bslib::bs_theme(version = 5,
+                            bg = "#FFFFFF",
+                            fg = "#000000ff",
+                            base_font = bslib::font_collection(
+                              bslib::font_google("Lato"),
+                              "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'"
+                              )
+                            ),
     bslib::nav_panel("Apresentação",
                      bslib::card(
                        bslib::card_body(
