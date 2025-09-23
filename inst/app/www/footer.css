@@ -1,0 +1,43 @@
+.footer {
+  background-color: #5BB02F;
+  display: flex;
+  flex-wrap: wrap;           /* permite quebra de linha em telas pequenas */
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100vw;
+  max-width: 100%;
+  padding: 10px;
+  box-sizing: border-box;    /* inclui padding na largura */
+}
+
+/* Imagens do footer */
+.footer img {
+  max-height: 95px;
+  height: auto;
+  width: auto;
+}
+
+/* Ajustes para tablets e celulares */
+@media (max-width: 768px) {
+  .footer img {
+    max-height: 70px;         /* menor altura em telas médias */
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    flex-direction: column;   /* empilha imagens verticalmente em celulares */
+    gap: 5px;
+    padding: 8px;
+  }
+  .footer img {
+    max-height: 60px;         /* reduz ainda mais a altura das imagens */
+  }
+}
+
+@media (max-height: 500px) {
+  .footer img {
+    max-height: 15vh;         /* altura mínima para telas muito pequenas */
+  }
+}

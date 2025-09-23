@@ -8,13 +8,13 @@
 }
 
 #apresentacao h1 {
-    font-size: 28px;
+    font-size: 1.5rem;
+    font-weight: 600;
     margin-bottom: 25px;
 }
 
 #apresentacao p {
+    font-size: 1rem;
     margin-bottom: 16px;
     text-align: justify;
 }
-
-
