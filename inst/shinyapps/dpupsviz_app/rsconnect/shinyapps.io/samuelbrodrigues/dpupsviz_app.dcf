@@ -1,0 +1,10 @@
+name: dpupsviz_app
+title:
+username: samuelbrodrigues
+account: samuelbrodrigues
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 15544050
+bundleId: 10944800
+url: https://samuelbrodrigues.shinyapps.io/dpupsviz_app/
+version: 1

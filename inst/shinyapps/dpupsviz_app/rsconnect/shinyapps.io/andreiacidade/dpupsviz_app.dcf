@@ -1,0 +1,10 @@
+name: dpupsviz_app
+title:
+username: andreiacidade
+account: andreiacidade
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 15544084
+bundleId: 10944811
+url: https://andreiacidade.shinyapps.io/dpupsviz_app/
+version: 1

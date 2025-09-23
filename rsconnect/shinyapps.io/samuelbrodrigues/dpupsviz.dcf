@@ -1,0 +1,10 @@
+name: dpupsviz
+title: Painel de Segregação Étnico-Racial
+username: samuelbrodrigues
+account: samuelbrodrigues
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 15535373
+bundleId: 10941563
+url: https://samuelbrodrigues.shinyapps.io/dpupsviz/
+version: 1
