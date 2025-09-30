@@ -36,6 +36,9 @@ filter_dados <- function(dados, input) {
     ) |> 
     dplyr::mutate(
       D_indice_value = round(D_indice_value, 3)
+    ) |> 
+    dplyr::rename(
+      "Índice de Segregação" = D_indice_value
     )
 }
 
