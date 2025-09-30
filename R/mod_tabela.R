@@ -71,24 +71,24 @@ mod_tabela_server <- function(id, dados) {
         )
       )
     })
-
+    
     # download CSV
     output$baixar_csv <- downloadHandler(
       filename = function() {
-        paste0("dados_filtrados_", Sys.Date(), ".csv")
+        paste0("dados_painel_segregacao_etnico_racial_", Sys.Date(), ".csv")
       },
       content = function(file) {
-        write.csv(dados_filtrados(), file, row.names = FALSE)
+        write.csv(dados_tabela, file, row.names = FALSE)
       }
     )
 
     # download XLSX
     output$baixar_xlsx <- downloadHandler(
       filename = function() {
-        paste0("dados_filtrados_", Sys.Date(), ".xlsx")
+        paste0("dados_painel_segregacao_etnico_racial_", Sys.Date(), ".xlsx")
       },
       content = function(file) {
-        openxlsx::write.xlsx(dados_filtrados(), file)
+        openxlsx::write.xlsx(dados_tabela, file)
       }
     )
   })
