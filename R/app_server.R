@@ -52,11 +52,26 @@ app_server <- function(input, output, session) {
     ) |> 
     dplyr::select(NV_GEO, NM_REGIAO, NM_UF, NM_RM, CD_MUN, NM_MUN_1, D_indice_tipo, D_indice_value, D_indice_CAT, "geometry" = geom) |> 
     sf::st_as_sf()
+
+  dados_mapa_regiao <- dados |> 
+    dplyr::filter(
+    NV_GEO == "RG"
+    ) |> 
+    dplyr::left_join(
+      mapa_regioes |> 
+        dplyr::select(code_region, geom) %>% 
+        dplyr::mutate(code_region = as.character(code_region)) |> 
+        sf::st_transform(crs = "+proj=longlat +datum=WGS84"),
+      by = dplyr::join_by(CD_REGIAO == code_region)
+    ) |> 
+    dplyr::select(NV_GEO, NM_REGIAO, NM_UF, NM_RM, CD_MUN, NM_MUN_1, D_indice_tipo, D_indice_value, D_indice_CAT, "geometry" = geom) |> 
+    sf::st_as_sf()
       
   dados_mapa <- dplyr::bind_rows(
     dados_mapa_municipio,
     dados_mapa_regiao_metropolitana,
-    dados_mapa_uf
+    dados_mapa_uf,
+    dados_mapa_regiao
   )
     
   # módulos do app
