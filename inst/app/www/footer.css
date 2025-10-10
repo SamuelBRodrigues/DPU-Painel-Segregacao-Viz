@@ -3,7 +3,7 @@
   display: flex;
   flex-wrap: wrap;           /* permite quebra de linha em telas pequenas */
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 20px;
   width: 100vw;
   max-width: 100%;
