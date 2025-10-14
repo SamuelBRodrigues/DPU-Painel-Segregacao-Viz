@@ -13,7 +13,7 @@ app_server <- function(input, output, session) {
     )
   dados_mapa_municipio <- dados |> 
     dplyr::filter(
-    NV_GEO == "MN"
+    NV_GEO == "Município"
     ) |> 
     dplyr::left_join(
       mapa_municipios |> 
@@ -27,7 +27,7 @@ app_server <- function(input, output, session) {
       
   dados_mapa_regiao_metropolitana <- dados |> 
     dplyr::filter(
-    NV_GEO == "RM"
+    NV_GEO == "Região Metropolitana"
     ) |> 
     dplyr::left_join(
       mapa_regioes_metropolitanas |> 
@@ -55,7 +55,7 @@ app_server <- function(input, output, session) {
 
   dados_mapa_regiao <- dados |> 
     dplyr::filter(
-    NV_GEO == "RG"
+    NV_GEO == "Região"
     ) |> 
     dplyr::left_join(
       mapa_regioes |> 
