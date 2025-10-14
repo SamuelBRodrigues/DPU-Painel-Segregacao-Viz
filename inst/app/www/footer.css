@@ -1,19 +1,21 @@
 .footer {
-  background-color: #5BB02F;
+  background-color: #2B3066;
   display: flex;
-  flex-wrap: wrap;           /* permite quebra de linha em telas pequenas */
+  flex-wrap: wrap;   /* permite quebra de linha em telas pequenas */
   align-items: center;
   justify-content: flex-start;
   gap: 20px;
-  width: 100vw;
-  max-width: 100%;
-  padding: 10px;
-  box-sizing: border-box;    /* inclui padding na largura */
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 4px solid #ffffff;
+  margin: 0 auto;
 }
 
 /* Imagens do footer */
 .footer img {
-  max-height: 95px;
+  max-height: 70px;
   height: auto;
   width: auto;
 }

@@ -1,12 +1,17 @@
 app_ui <- function() {
 
   # CSS
+  css_header <- system.file("app/www/header.css", package = "dpupsviz")
   css_footer <- system.file("app/www/footer.css", package = "dpupsviz")
   css_apresentacao <- system.file("app/www/apresentacao.css", package = "dpupsviz")
 
   #Page Navbar
   bslib::page_navbar(
-    title = "Painel de Segregação Étnico-Racial",
+
+    title = shiny::tags$div(
+      shiny::tags$img(src = "www/logo_DPU_200h.png"),
+      "Painel de Segregação Étnico-Racial"
+    ),
     window_title = "Painel Segregação Étnico-Racial",
 
     # Tema
@@ -21,13 +26,13 @@ app_ui <- function() {
     ),
 
     # Inclui os CSS via includeCSS()
+    shiny::includeCSS(css_header),
     shiny::includeCSS(css_footer),
     shiny::includeCSS(css_apresentacao),
 
     # Footer
     footer = shiny::tags$div(
       class = "footer",
-      shiny::tags$img(src = "www/logo_DPU_200h.png"),
       shiny::tags$img(src = "www/DPU_PNUD_200h.png")
     ),
 
