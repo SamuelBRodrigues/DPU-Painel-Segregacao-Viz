@@ -14,6 +14,11 @@ app_ui <- function() {
     ),
     window_title = "Painel Segregação Étnico-Racial",
 
+    #favicon
+    tags$head(
+      tags$link(rel = "icon", type = "image/png", href = "www/logo_icon_48h.png")
+    ),
+
     # Tema
     theme = bslib::bs_theme(
       version = 5,
