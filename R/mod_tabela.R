@@ -5,6 +5,11 @@
 #' @import shiny
 #' @import DT
 mod_tabela_ui <- function(id) {
+  
+  # Definindo link de download dos dados brutos
+  url_csv_drive <- "https://drive.google.com/uc?export=download&id=1J8eM6CJXBeEh22Jsq8E1wCuSVaNnxxq7"
+  url_xlsx_drive <- "https://drive.google.com/uc?export=download&id=1M82O6mHGb7Naywlyc6ZCazAJ_9Of7dMV"
+
   ns <- NS(id)
 
   layout_sidebar(
@@ -24,10 +29,24 @@ mod_tabela_ui <- function(id) {
     ),
     # parte principal
     div(
-      style = "display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 10px;",
-      downloadButton(ns("baixar_csv"), "Baixar CSV", class = "btn-sm"),
-      downloadButton(ns("baixar_xlsx"), "Baixar XLSX", class = "btn-sm")
+    style = "display: flex; justify-content: flex-end; gap: 10px;",
+    
+    # Botão CSV via tags$a (agora ele encontra a variável url_csv_drive)
+    tags$a(
+      "Baixar CSV",
+      href = url_csv_drive,
+      class = "btn btn-default btn-sm shiny-download-link",
+      target = "_blank"
     ),
+    
+    # Botão XLSX via tags$a (agora ele encontra a variável url_xlsx_drive)
+    tags$a(
+      "Baixar XLSX",
+      href = url_xlsx_drive,
+      class = "btn btn-default btn-sm shiny-download-link",
+      target = "_blank"
+    )
+  ),
     shinycssloaders::withSpinner(DTOutput(ns("tabela")), type = 1)
   )
 }
@@ -71,25 +90,6 @@ mod_tabela_server <- function(id, dados) {
         )
       )
     })
-    
-    # download CSV
-    output$baixar_csv <- downloadHandler(
-      filename = function() {
-        paste0("dados_painel_segregacao_etnico_racial_", Sys.Date(), ".csv")
-      },
-      content = function(file) {
-        write.csv(dados_tabela, file, row.names = FALSE)
-      }
-    )
 
-    # download XLSX
-    output$baixar_xlsx <- downloadHandler(
-      filename = function() {
-        paste0("dados_painel_segregacao_etnico_racial_", Sys.Date(), ".xlsx")
-      },
-      content = function(file) {
-        openxlsx::write.xlsx(dados_tabela, file)
-      }
-    )
   })
 }
