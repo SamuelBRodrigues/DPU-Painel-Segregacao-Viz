@@ -1,20 +1,142 @@
-#apresentacao {
-    line-height: 1.6;
-    padding: 20px;
-    border-radius: 8px;
-    width: 90%;      /* ocupa 90% da tela */
-    max-width: 1100px; /* mas nunca ultrapassa 1100px */
-    margin: 0 auto;
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+body {
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+               Roboto, 'Helvetica Neue', Arial, sans-serif,
+               'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
-#apresentacao h1 {
+#apresentacao {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 40px;
+    padding: 30px 15px;
+    width: 90%;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+/* ---- TEXTO ---- */
+#texto-apresentacao {
+    flex: 1;
+    max-width: 1000px;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-y: auto;
+    height: 100%;
+    line-height: 1.6;
+    scrollbar-width: thin;
+    scrollbar-color: #bbb transparent;
+}
+
+#texto-apresentacao::-webkit-scrollbar {
+    width: 8px;
+}
+#texto-apresentacao::-webkit-scrollbar-thumb {
+    background-color: #bbb;
+    border-radius: 4px;
+}
+#texto-apresentacao::-webkit-scrollbar-thumb:hover {
+    background-color: #999;
+}
+
+#texto-apresentacao h1 {
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 25px;
 }
 
-#apresentacao p {
+#texto-apresentacao p {
     font-size: 1rem;
     margin-bottom: 16px;
     text-align: justify;
+}
+
+/* ---- BOTÕES ---- */
+#botoes-download {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 20px;
+    width: 280px;
+}
+
+#botoes-download button {
+    border: none;
+    padding: 0 20px;       /* Removemos padding vertical para controlar height */
+    height: 80px; 
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: #2B3066;
+    color: white;
+    transition: background-color 0.3s ease;
+
+}
+
+#botoes-download span {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* ============================= */
+/*        RESPONSIVIDADE         */
+/* ============================= */
+
+/* Tablets e celulares (até 992px de largura OU até 600px de altura) */
+@media (max-width: 992px), (max-height: 600px) {
+    #apresentacao {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        height: auto;
+        gap: 25px;
+    }
+
+    #texto-apresentacao {
+        max-width: 100%;
+        height: auto;
+        overflow-y: visible;
+    }
+
+    #botoes-download {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    #botoes-download button {
+        padding: 16px;
+        font-size: 0.95rem;
+    }
+}
+
+/* Celulares pequenos (até 480px) */
+@media (max-width: 480px) {
+    #apresentacao {
+        padding: 20px 10px;
+        gap: 20px;
+    }
+
+    #texto-apresentacao h1 {
+        font-size: 1.3rem;
+    }
+
+    #texto-apresentacao p {
+        font-size: 0.95rem;
+    }
+
+    #botoes-download {
+        width: 100%;
+    }
+
+    #botoes-download button {
+        width: 100%;
+        padding: 14px;
+        font-size: 0.9rem;
+    }
 }
