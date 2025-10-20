@@ -13,7 +13,7 @@ app_server <- function(input, output, session) {
     )
   dados_mapa_municipio <- dados |> 
     dplyr::filter(
-    NV_GEO == "Município"
+    NV_GEO == "MN"
     ) |> 
     dplyr::left_join(
       mapa_municipios |> 
@@ -27,7 +27,7 @@ app_server <- function(input, output, session) {
       
   dados_mapa_regiao_metropolitana <- dados |> 
     dplyr::filter(
-    NV_GEO == "Região Metropolitana"
+    NV_GEO == "RM"
     ) |> 
     dplyr::left_join(
       mapa_regioes_metropolitanas |> 
@@ -55,7 +55,7 @@ app_server <- function(input, output, session) {
 
   dados_mapa_regiao <- dados |> 
     dplyr::filter(
-    NV_GEO == "Região"
+    NV_GEO == "RG"
     ) |> 
     dplyr::left_join(
       mapa_regioes |> 
@@ -72,7 +72,15 @@ app_server <- function(input, output, session) {
     dados_mapa_regiao_metropolitana,
     dados_mapa_uf,
     dados_mapa_regiao
-  )
+  ) |> 
+    dplyr::mutate(
+      NV_GEO = dplyr::case_when(
+        NV_GEO == "MN" ~ "Município",
+        NV_GEO == "RM" ~ "Região Metropolitana",
+        NV_GEO == "RG" ~ "Região",
+        .default = NV_GEO
+      )
+    )
     
   # módulos do app
   mod_tabela_server("tabela", dados = dados)

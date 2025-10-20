@@ -23,8 +23,8 @@ mod_tabela_ui <- function(id) {
       checkboxGroupInput(
         ns("nivel_geo"),
         "Selecione os níveis geográficos:",
-        choices = c("Município", "Reg. Metropolitana" = "Região Metropolitana", "UF", "Região" = "Região", "Brasil"),
-        selected = "Município"
+        choices = c("Município" = "MN", "Reg. Metropolitana" = "RM", "UF", "Região" = "RG", "Brasil"),
+        selected = "MN"
       )
     ),
     # parte principal
