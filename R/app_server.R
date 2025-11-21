@@ -7,10 +7,51 @@
 app_server <- function(input, output, session) {
 
   # carregar dados internos do pacote
-  dados <- dados_tabela |> 
-    dplyr::select(
-      NV_GEO, CD_REGIAO, NM_REGIAO, CD_UF, NM_UF, NM_RM, CD_MUN, NM_MUN_1, D_indice_tipo, D_indice_value, D_indice_CAT
-    )
+  faixas_trabalho_regex <- c(
+  "Pessoas 15 A 29 Anos",
+  "Pessoas 30 A 59 Anos"
+)
+# se quiser adicionar uma terceira:
+# "Pessoas 10 Anos Ou Mais"
+
+# CARREGAR DADOS E APLICAR FILTROS CORRETOS
+dados <- dados_tabela |>
+  dplyr::select(
+    NV_GEO, CD_REGIAO, NM_REGIAO, CD_UF, NM_UF, NM_RM, CD_MUN, NM_MUN_1,
+    D_indice_tipo, D_indice_value, D_indice_CAT
+  ) |>
+  
+  # remover AMARELO
+  dplyr::filter(
+    !grepl("Amarela", D_indice_tipo, ignore.case = TRUE)
+  ) |>
+  
+  # remover RENDA (se aparecer)
+  dplyr::filter(
+    !grepl("Renda", D_indice_tipo, ignore.case = TRUE)
+  ) |>
+  
+  # remover IDADE que NÃO FAZ PARTE das 3 faixas desejadas
+  dplyr::filter(
+    # manter tudo que não é faixa etária ("Pessoas" + número)
+    !grepl("^Pessoas", D_indice_tipo) |
+      grepl(paste(faixas_trabalho_regex, collapse = "|"), D_indice_tipo)
+  ) |>
+  
+  # remover 0–9
+  dplyr::filter(
+    !grepl("0 A 9", D_indice_tipo)
+  ) |>
+  
+  # remover 0–14
+  dplyr::filter(
+    !grepl("0 A 14", D_indice_tipo)
+  ) |>
+  
+  # remover 60+
+  dplyr::filter(
+    !grepl("60 Anos Ou Mais", D_indice_tipo, ignore.case = TRUE)
+  )
   dados_mapa_municipio <- dados |> 
     dplyr::filter(
     NV_GEO == "MN"
